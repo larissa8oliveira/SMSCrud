@@ -1,0 +1,124 @@
+﻿.card {
+    width: 550px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+    .card h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+#formCadastro div {
+    margin-bottom: 10px;
+}
+.btnConsultaCEP {
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    font-weight: 100;
+    line-height: 1.0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+}
+.btnCadastrar {
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    width: 550px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+.txtCEP {
+    width: 300px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+btnEditar {
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+    .table h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+}
