@@ -34,6 +34,22 @@ namespace SMSCrud
         {
             Response.Write("<script>alert('" + msg + "')</script>");
         }
+        public void LimparCampos()
+        {
+            txtNome.Text = "";
+            txtSenha.Text = "";
+            txtEmail.Text = "";
+            txtCPF.Text = "";
+            txtDataNascimento.Text = "";
+            txtTelefones.Text = "";
+            txtCEP.Text = "";
+            txtLogradouro.Text = "";
+            txtComplemento.Text = "";
+            txtNumero.Text = "";
+            txtCidade.Text = "";
+            txtEstado.Text = "";
+            txtPais.Text = "";
+        }
         protected void btnCadastrar_Click(object sender, EventArgs e)
         {
             try
@@ -125,6 +141,7 @@ namespace SMSCrud
                     uDal.cadastrarUsuario(objusuario);
 
                     ExibirMensagem("Usuário cadastrado com sucesso!");
+                    LimparCampos();
                     CarregarDadosGridView();
                 }
             }
@@ -133,6 +150,7 @@ namespace SMSCrud
                 ExibirMensagem("Erro ao salvar cadastro! Entre em contato com o administrador do sistema.");
             }
         }
+       
         private void CarregarDadosGridView()
         {
             gridUsuarios.DataSource = uDal.listarUsuarios();
