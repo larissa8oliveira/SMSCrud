@@ -6,7 +6,7 @@ namespace SMSCrud
 {
     public partial class editarUsuario : System.Web.UI.Page
     {
-        // Criando  uma instância de UsuarioDAL
+        // Criando uma instância de UsuarioDAL
         private UsuarioDAL uDal = new UsuarioDAL();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -28,6 +28,7 @@ namespace SMSCrud
                 }
             }
         }
+
         protected void btnConsultaCEP_Click(object sender, EventArgs e)
         {
             UsuarioUtils.ConsultarCEP(txtCEP, txtLogradouro, txtCidade, txtEstado, txtPais);
@@ -44,9 +45,9 @@ namespace SMSCrud
                 txtEmail.Text = usuario.Email;
                 txtSenha.Text = usuario.Senha; // Lembre-se de que a senha não está criptografada neste exemplo, é apenas para fins ilustrativos.
                 txtCPF.Text = usuario.CPF;
-                txtDataNascimento.Text = usuario.DataNascimento.ToString("yyyy-MM-dd");
-                txtDataCriacao.Text = usuario.DataHoraCriacao.ToString("yyyy-MM-dd HH:mm:ss");
-                txtDataAtualizacao.Text = usuario.DataHoraAtualizacao.ToString("yyyy-MM-dd HH:mm:ss");
+                txtDataNascimento.Text = usuario.DataNascimento.ToString("dd-MM-yyyy");
+                txtDataCriacao.Text = usuario.DataHoraCriacao.ToString("dd-MM-yyyy HH:mm:ss");
+                txtDataAtualizacao.Text = usuario.DataHoraAtualizacao.ToString("dd-MM-yyyy HH:mm:ss");
                 txtTelefones.Text = usuario.Telefones;
                 ddlPerfil.SelectedValue = usuario.Perfil;
                 txtCEP.Text = usuario.CEP;
@@ -63,6 +64,7 @@ namespace SMSCrud
                 Response.Redirect("cadUsuario.aspx");
             }
         }
+
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             // Obtendo o ID do usuário da QueryString
@@ -75,10 +77,56 @@ namespace SMSCrud
 
                 if (usuario != null)
                 {
+                    // Validações de campos obrigatórios
+                    if (string.IsNullOrEmpty(txtNome.Text))
+                    {
+                        ExibirMensagem("O campo Nome é obrigatório!");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtEmail.Text))
+                    {
+                        ExibirMensagem("O campo Email é obrigatório!");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtCPF.Text))
+                    {
+                        ExibirMensagem("O campo CPF é obrigatório!");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtDataNascimento.Text))
+                    {
+                        ExibirMensagem("O campo Data de Nascimento é obrigatório!");
+                        return;
+                    }
+
+                    // Validação de formato de e-mail
+                    if (!UsuarioUtils.IsValidEmail(txtEmail.Text))
+                    {
+                        ExibirMensagem("O email informado é inválido!");
+                        return;
+                    }
+
+                    // Validação de formato de CPF
+                    if (!UsuarioUtils.IsValidCPF(txtCPF.Text))
+                    {
+                        ExibirMensagem("O CPF informado é inválido!");
+                        return;
+                    }
+
+                    // Validação da data de nascimento
+                    if (!DateTime.TryParseExact(txtDataNascimento.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime dataNascimento))
+                    {
+                        ExibirMensagem("A data de nascimento informada é inválida! Use o formato dd-MM-yyyy.");
+                        return;
+                    }
+
                     // Atualiza os dados do usuário com base nos campos do formulário
                     usuario.Nome = txtNome.Text;
                     usuario.Email = txtEmail.Text;
-                    usuario.Senha = txtSenha.Text; // Lembre-se de que a senha não está criptografada neste exemplo, é apenas para fins ilustrativos. 
+                    usuario.Senha = txtSenha.Text; // Lembre-se de que a senha não está criptografada neste exemplo, é apenas para fins ilustrativos.
                     usuario.DataNascimento = DateTime.Parse(txtDataNascimento.Text);
                     usuario.Telefones = txtTelefones.Text;
                     usuario.Perfil = ddlPerfil.SelectedValue;
@@ -108,6 +156,11 @@ namespace SMSCrud
                 // Se não houver ID na QueryString, redirecione de volta para a página de cadastro
                 Response.Redirect("cadUsuario.aspx");
             }
+        }
+
+        public void ExibirMensagem(string msg)
+        {
+            Response.Write("<script>alert('" + msg + "')</script>");
         }
     }
 }
